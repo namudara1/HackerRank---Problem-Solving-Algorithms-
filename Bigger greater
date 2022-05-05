@@ -1,0 +1,66 @@
+ package HelloWorld;
+
+import java.util.*;
+
+
+public class HellowC {
+
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        String [] out = new String[n];
+        for(int i=0;i<n;i++){
+            String str= scanner.next();
+            out[i] = Caluculate(str);
+        }
+
+        for(int i=0;i< out.length;i++){
+            System.out.println(out[i]);
+        }
+
+    }
+
+    private static String Caluculate(String str_original) {
+        String str = str_original;
+        if(str.length()==1){
+            return "no answer";
+        }
+        ArrayList<Character> from_right = new ArrayList<>();
+        from_right.add(str.charAt(str.length()-1));
+        for(int i=str.length()-1;i>=1;i--){
+            if(1000-(int) str.charAt(i) >= 1000-(int) str.charAt(i-1)){
+                from_right.add(str.charAt(i-1));
+            }
+            else{
+                Collections.reverse(from_right);
+                char stopped_char = str.charAt(i-1);
+                int min_diff=Integer.MAX_VALUE;
+                int min_diff_char_index_of_arraylist =-1;
+
+                for(int j=0;j<from_right.size();j++){
+                    if(min_diff>( 1000-(int)stopped_char - 1000-(int)from_right.get(j)  ) &&  1000-(int)stopped_char >1000-(int)from_right.get(j) ){
+                        min_diff_char_index_of_arraylist = j;
+                    }
+                    else{
+                            break;
+
+                    }
+                }
+
+                char r = from_right.get(min_diff_char_index_of_arraylist);
+                str=str.substring(0,i-1) + r ;
+                from_right.set(min_diff_char_index_of_arraylist,stopped_char);
+                for(int x=from_right.size()-1;x>=0;x--){
+                    str=str+ from_right.get(x);
+                }
+                return  str==str_original? "no answer" : str;
+            }
+
+        }
+        return "no answer";
+    }
+
+}
