@@ -1,0 +1,58 @@
+package HelloWorld;
+
+import java.util.*;
+
+
+public class HellowC {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        StringBuilder input = new StringBuilder(scanner.nextLine());
+        for(int i=0;i<input.length();i++){
+            if(input.charAt(i)==' '){
+                input.deleteCharAt(i);
+                i--;
+            }
+        }
+
+//        System.out.println(input.length());
+        int max_col = (int)Math.ceil(Math.sqrt(input.length()));
+        int min_row = (int)Math.floor(Math.sqrt(input.length()));
+
+        if(max_col * min_row < input.length()){
+            min_row = max_col;
+        }
+
+        ArrayList <String>  out =  new ArrayList<>();
+//        System.out.println(""+out.get(0));
+//        for(int i=0;i<max_col;i++){
+//            out.set(i,"");
+//        }
+
+
+        int i=0;
+        System.out.println(input.length());
+        while (i<input.length()){
+            if(out.size()-1<(i%max_col)){
+                out.add(""+input.charAt(i%max_col));
+            }
+            else{
+                out.set(i%max_col , out.get(i%max_col) + ""+input.charAt(i) )  ;
+//                System.out.println(out.toString());
+            }
+//            System.out.println(out.toString());
+            i++;
+        }
+//        System.out.println(out.size()+"sze");
+        for(int j=0;j<out.size();j++){
+            System.out.print(out.get(j));
+            if(j!= out.size()-1) System.out.print(" lol");
+        }
+
+
+    }
+
+
+}
