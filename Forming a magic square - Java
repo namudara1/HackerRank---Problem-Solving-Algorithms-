@@ -51,8 +51,6 @@ public class HellowC {
             if(j!= out.size()-1) System.out.print(" lol");
         }
 
-
     }
-
 
 }
