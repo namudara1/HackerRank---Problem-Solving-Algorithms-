@@ -1,0 +1,25 @@
+//  package HelloWorld;
+
+import java.math.BigInteger;
+import java.util.*;
+
+
+public class HellowC {
+
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        System.out.println(  Factorial(BigInteger.valueOf(n)));
+
+    }
+
+    private static BigInteger Factorial(BigInteger n) {
+        if(n.equals(BigInteger.valueOf(1))) return new BigInteger("1");
+        return n.multiply(Factorial(n.subtract(BigInteger.valueOf(1)))) ;
+    }
+
+
+}
