@@ -1,0 +1,60 @@
+//  package HelloWorld;
+
+import java.util.*;
+
+
+public class HellowC {
+
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int r = scanner.nextInt();
+//        LinkedList<Integer> ranked_list = new LinkedList<>();
+//        int ranked_arr [] = new int[r];
+
+        ArrayList<Integer> ranks = new ArrayList<>();
+
+        for(int i=0;i<r;i++){
+            int score = scanner.nextInt();
+            if(ranks.isEmpty() || score!=ranks.get(ranks.size()-1)){
+                ranks.add(score);
+            }
+        }
+
+        ArrayList<Integer> out = new ArrayList<>();
+
+        int j=ranks.size()-1;
+        int p = scanner.nextInt();
+        for(int i=0;i<p;i++){
+            int play =scanner.nextInt();
+            while (j!=-1){
+                if(play<ranks.get(j)){
+                    out.add(j+2);
+//                    System.out.println(j+2);
+                    ranks.add(j+1,play);
+                    j++;
+                     break;
+                }
+                else if(play==ranks.get(j)){
+                    out.add(j+1);
+//                    System.out.println(j+1);
+                    break;
+                }
+                else{
+                    j--;
+                }
+            }
+            if(j==-1){
+                out.add(1);
+//                System.out.println(1);
+            }
+        }
+
+        for(int x :out){
+            System.out.println(x);
+        }
+    }
+
+}
