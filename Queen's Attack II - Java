@@ -1,0 +1,91 @@
+//  package HelloWorld;
+
+import java.util.*;
+
+
+public class HellowC {
+
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int obst_amount = scanner.nextInt();
+        int q_r = scanner.nextInt();
+        int q_c = scanner.nextInt();
+
+        int obst_arr[][] = new int[obst_amount][2];
+
+        for (int i = 0; i < obst_amount; i++) {
+            obst_arr[i][0] = scanner.nextInt();
+            obst_arr[i][1] = scanner.nextInt();
+        }
+
+        int count_arr[] = new int[8];
+
+        count_arr[0] = n-q_r;
+        count_arr[4] = q_r-1;
+        count_arr[2]= n-q_c;
+        count_arr[6] = q_c-1;
+        count_arr[1] = n -q_r <n -q_c ? n-q_r : n-q_c;
+        count_arr[3] = q_r-1 < n -q_c ? q_r-1: n-q_c;
+        count_arr[5] = q_c-1 <q_r-1 ? q_c-1: q_r-1 ;
+        count_arr[7] =q_c-1 < n-q_r ? q_c -1: n-q_r;
+
+            for (int j = 0; j < obst_amount; j++) {
+                if (obst_arr[j][1] == q_c) { // for same col
+                    if (obst_arr[j][0] < q_r) {
+                        if (count_arr[4] > q_r - obst_arr[j][0] - 1) {
+                            count_arr[4] = q_r - obst_arr[j][0] - 1;
+                        }
+                    } else {
+                        if (count_arr[0] > obst_arr[j][0] - q_r - 1) {
+                            count_arr[0] = obst_arr[j][0] - q_r - 1;
+                        }
+                    }
+                } else if (obst_arr[j][0] == q_r) { // for same row
+                    if (obst_arr[j][1] < q_c) {
+                        if (count_arr[6] > q_c - obst_arr[j][1] - 1) {
+                            count_arr[6] = q_c - obst_arr[j][1] - 1;
+                        }
+                    } else {
+                        if (count_arr[2] > obst_arr[j][1] - q_c - 1) {
+                            count_arr[2] = obst_arr[j][1] - q_c - 1;
+                        }
+                    }
+                }
+                else if (obst_arr[j][0] - q_r == (obst_arr[j][1] - q_c) ) { // for NE-SW diagonal
+                    if (obst_arr[j][0] < q_r) {
+                        if (count_arr[5] > q_r - obst_arr[j][0] - 1) {
+                            count_arr[5] = q_r - obst_arr[j][0] - 1;
+                        }
+                    } else {
+                        if (count_arr[1] > obst_arr[j][0] - q_r - 1) {
+                            count_arr[1] = obst_arr[j][0] - q_r - 1;
+                        }
+                    }
+
+                }
+                else if ( obst_arr[j][0] - q_r ==  -1*( obst_arr[j][1] - q_c)   ) { // for SE-NW diagonal
+                    if (obst_arr[j][0] < q_r) {
+                        if (count_arr[3] > q_r - obst_arr[j][0] - 1) {
+                            count_arr[3] = q_r - obst_arr[j][0] - 1;
+                        }
+                    } else {
+                        if (count_arr[7] > obst_arr[j][0] - q_r - 1) {
+                            count_arr[7] = obst_arr[j][0] - q_r - 1;
+                        }
+                    }
+
+                }
+            }
+
+//        System.out.println(Arrays.toString(count_arr));
+
+        int count=0;
+        for(int v : count_arr){
+            count=count+v;
+        }
+        System.out.println(count);
+    }
+}
